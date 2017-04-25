@@ -25,23 +25,23 @@ from cloudmesh.shell.command import PluginCommand
 from cloudmesh.shell.command import command
 from ruamel import yaml
 
-from cloudmesh.openstack.api import OpenStack
+from cloudmesh.shade.api import Shade
 
 
-class OpenstackCommand(PluginCommand):
+class ShadeCommand(PluginCommand):
     # noinspection PyUnusedLocal
     @command
-    def do_openstack(self, args, arguments):
+    def do_shade(self, args, arguments):
         """
         ::
 
           Usage:
-                openstack info
-                openstack yaml 
-                openstack yaml list [CLOUD] 
-                openstack image list [CLOUD] [--format=FORMAT]
-                openstack flavor list [CLOUD] [--format=FORMAT]
-                openstack vm list [CLOUD] [--user=USER] [--format=FORMAT] [--ip=public|private]
+                shade info
+                shade yaml 
+                shade yaml list [CLOUD] 
+                shade image list [CLOUD] [--format=FORMAT]
+                shade flavor list [CLOUD] [--format=FORMAT]
+                shade vm list [CLOUD] [--user=USER] [--format=FORMAT] [--ip=public|private]
 
           This command does some useful things.
 
@@ -66,7 +66,7 @@ class OpenstackCommand(PluginCommand):
             if arguments.CLOUD is None:
                 arguments.CLOUD = cloud
 
-            provider = OpenStack(arguments.CLOUD)
+            provider = Shade(arguments.CLOUD)
             provider.information()
 
         elif arguments.yaml and arguments.list:
@@ -114,7 +114,7 @@ class OpenstackCommand(PluginCommand):
 
             # print (arguments.CLOUD)
 
-            provider = OpenStack(arguments.CLOUD)
+            provider = Shade(arguments.CLOUD)
             images = provider.images()
 
             try:
@@ -144,7 +144,7 @@ class OpenstackCommand(PluginCommand):
 
             # print (arguments.CLOUD)
 
-            provider = OpenStack(arguments.CLOUD)
+            provider = Shade(arguments.CLOUD)
             d = provider.flavors()
             print(arguments.CLOUD)
             print(Printer.dict(d,
@@ -159,7 +159,7 @@ class OpenstackCommand(PluginCommand):
 
             # print (arguments.CLOUD)
 
-            provider = OpenStack(arguments.CLOUD)
+            provider = Shade(arguments.CLOUD)
             elements = provider.vms()
 
             if arguments.user is not None:
