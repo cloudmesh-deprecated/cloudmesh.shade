@@ -1,6 +1,2 @@
-apache-libcloud
-timestring
-humanize
-requests
 shade
 ruamel.yaml
