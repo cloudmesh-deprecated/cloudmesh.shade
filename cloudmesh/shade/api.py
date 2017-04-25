@@ -16,6 +16,16 @@ warnings.simplefilter("ignore")
 
 
 def _authenticate(cloud):
+    """Authenticate to a cloud
+
+    Ideally we would use shade.openstack_cloud or
+    os_client_config.make_shade (equivalent), but they don't seem to
+    support passing in an arbitrary dict of configuration parameters
+    (the docs are not very clear ATM).
+
+    To work around this, we write a temporary file with the
+    appropriate configuration and tell os-client-config to load it.
+    """
     CLOUD_NAME = 'default'
 
     tmp = tempfile.NamedTemporaryFile()
